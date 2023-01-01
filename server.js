@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import User from './models/User.js'
+import cors from 'cors';
 
 const app = express();
 
@@ -15,6 +16,10 @@ const db = mongoose.connection;
 
 db.on('error', err=>console.log(err));
 db.once('open', () => console.log('Connected to database'));
+
+app.use(cors({
+    origin: 'http://localhost:8000'
+}))
 
 app.get('/', (req, res) => {
     console.log('Inside GET endpoint');
